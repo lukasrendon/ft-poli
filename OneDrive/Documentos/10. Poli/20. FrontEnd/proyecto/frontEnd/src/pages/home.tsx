@@ -26,15 +26,7 @@ const Home: React.FC = () => {
       color: "#fbe8d3",
       route: "rutas/gestionTareas",
     },
-    {
-      id: 3,
-      title: "CERREM Mujeres",
-      description:
-        "Atención y seguimiento especializado a casos de mujeres en situación de vulnerabilidad, asegurando respuestas efectivas y oportunas.",
-      icon: <MdWarning size={40} color="#d9534f" />,
-      color: "#fdecea",
-      route: "/cerremMujeres/BandejaCasosCerrem",
-    },
+
   ];
 
   return (
