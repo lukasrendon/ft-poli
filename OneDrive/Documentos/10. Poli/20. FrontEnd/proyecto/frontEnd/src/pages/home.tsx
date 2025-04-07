@@ -10,21 +10,21 @@ const Home: React.FC = () => {
   const options = [
     {
       id: 1,
-      title: "Lider APP",
+      title: "Gestión de Usuarios",
       description:
-        "Gestiona la distribución de casos, asegurando que cada solicitante reciba atención adecuada y a tiempo.",
+        "Gestiona la distribución de usuarios",
       icon: <MdPerson size={40} color="#3085d6" />,
       color: "#e1efff",
-      route: "/liderApp/BandejaCasosLiderApp",
+      route: "/rutas/registro",
     },
     {
       id: 2,
-      title: "Profesional APP",
+      title: "Organizador de tareas",
       description:
-        "Supervisión y evaluar la información de los solicitantes, brindando acompañamiento y asegurando el cumplimiento de su atención.",
+        "Permite la gestión de tareas",
       icon: <MdGroup size={40} color="#e67e22" />,
       color: "#fbe8d3",
-      route: "profesionalApp/BandejaCasosProfesionalApp",
+      route: "rutas/gestionTareas",
     },
     {
       id: 3,
