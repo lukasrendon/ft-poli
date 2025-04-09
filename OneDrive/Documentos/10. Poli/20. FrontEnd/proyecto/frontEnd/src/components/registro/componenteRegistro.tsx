@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "/src/styles/styles.css";
 import { saveUser, getUsers, deleteUser, updateUser, User } from "../../services/userService";
 
@@ -8,7 +7,6 @@ const Register: React.FC = () => {
   const [editing, setEditing] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [users, setUsers] = useState<User[]>([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     setUsers(getUsers());
