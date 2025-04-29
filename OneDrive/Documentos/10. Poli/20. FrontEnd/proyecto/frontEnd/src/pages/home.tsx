@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/home.css";
 import CardItem from "../shared/cardItem";
-import { MdPerson, MdGroup, MdWarning } from "react-icons/md";
+import { MdPerson, MdGroup } from "react-icons/md";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
