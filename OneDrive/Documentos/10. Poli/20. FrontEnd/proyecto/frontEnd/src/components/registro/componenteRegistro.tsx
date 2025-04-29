@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "/src/styles/styles.css";
-import { saveUser, getUsers, deleteUser, updateUser, User } from "../../services/userService";
+import { saveUser, getUsers, deleteUser, updateUser, User, Role } from "../../services/userService";
 
 const Register: React.FC = () => {
-  const [form, setForm] = useState<User>({ name: "", email: "", password: "" });
+  const [form, setForm] = useState<User>({ name: "", email: "", password: "", role: "Visualizador" });
   const [editing, setEditing] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [users, setUsers] = useState<User[]>([]);
@@ -14,15 +14,25 @@ const Register: React.FC = () => {
     setUsers(getUsers());
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!form.name || !form.email || !form.password) {
-      setError("Por favor completa todos los campos.");
+    // Validaciones básicas
+    if (!form.name.trim()) {
+      setError("El nombre es obligatorio.");
+      return;
+    }
+    if (!form.email.includes("@")) {
+      setError("El correo electrónico no es válido.");
+      return;
+    }
+    if (form.password.length < 6) {
+      setError("La contraseña debe tener al menos 6 caracteres.");
       return;
     }
 
@@ -38,7 +48,7 @@ const Register: React.FC = () => {
     }
 
     setUsers(getUsers());
-    setForm({ name: "", email: "", password: "" });
+    setForm({ name: "", email: "", password: "", role: "Visualizador" });
     setError(null);
   };
 
@@ -79,6 +89,14 @@ const Register: React.FC = () => {
           value={form.password}
           onChange={handleChange}
         />
+        <select
+          name="role"
+          value={form.role}
+          onChange={handleChange}
+        >
+          <option value="Administrador">Administrador</option>
+          <option value="Visualizador">Visualizador</option>
+        </select>
         <button type="submit">{editing ? "Actualizar" : "Registrarse"}</button>
         {error && <p className="error">{error}</p>}
       </form>
@@ -92,6 +110,7 @@ const Register: React.FC = () => {
             <tr>
               <th>Nombre</th>
               <th>Correo</th>
+              <th>Rol</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -100,6 +119,7 @@ const Register: React.FC = () => {
               <tr key={idx}>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
+                <td>{user.role}</td>
                 <td>
                   <button onClick={() => handleEdit(user)}>✏️ Editar</button>
                   <button onClick={() => handleDelete(user.email)}>🗑️ Eliminar</button>
