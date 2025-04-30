@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "/src/styles/styles.css";
-import { saveUser, getUsers, deleteUser, updateUser, User, Role } from "../../services/userService";
+import { saveUser, getUsers, deleteUser, updateUser, User } from "../../services/userService";
 
 const Register: React.FC = () => {
   const [form, setForm] = useState<User>({ name: "", email: "", password: "", role: "Visualizador" });
